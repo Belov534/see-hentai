@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>see-hentai</title>
+  <link rel="stylesheet" href="papabody.css">
+</head>
+<body>
+  <header>
+  </header>
+
+<nav>
+  <ul class="tabs">
+    <li><a href="videos.html">Видео</a></li>
+    <li class="tab active" onclick="openTab('main')"><a href="main.html" class="main-tab">Главная</a></li>
+    <li><a href="photos.html">Фото</a></li>
+  </ul>
+</nav>
+
+  <div class="video-feed">
+    <div class="video-cards-container">
+      <!-- Здесь можно добавить видео-карточки для вашей видео-ленты -->
+      <div class="video-card" onclick="playVideo('video2.mp4', this)">
+        <img src="15.png" alt="Video Thumbnail">
+        <h2>Площадка для доминирования (1 серия)</h2>
+      </div>
+      <div class="video-card" onclick="playVideo('video1.mp4', this)">
+        <img src="15.png" alt="Video Thumbnail">
+        <h2>Сэкси барби гырл</h2>
+      </div>
+      <div class="video-card" onclick="playVideo('video3.mp4', this)">
+        <img src="16.png" alt="Video Thumbnail">
+        <h2>3</h2>
+      </div>
+      <div class="video-card" onclick="playVideo('video4.mp4', this)">
+        <img src="17.png" alt="Video Thumbnail">
+        <h2>4</h2>
+      </div>
+      <div class="video-card" onclick="playVideo('video4.mp4', this)">
+        <img src="17.png" alt="Video Thumbnail">
+        <h2>5</h2>
+      </div>
+      <div class="video-card" onclick="playVideo('video4.mp4', this)">
+        <img src="17.png" alt="Video Thumbnail">
+        <h2>6</h2>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentVideo = null;
+
+    function openTab(tabName) {
+      // Your existing function for switching tabs (if needed)
+    }
+
+    function playVideo(videoSource, videoCard) {
+      const videoThumbnail = videoCard.querySelector("img");
+      const videoTitle = videoCard.querySelector("h2");
+
+      if (currentVideo && currentVideo.parentElement === videoCard) {
+        // Clicked on the same video, pause and close it.
+        pauseVideo();
+        return;
+      }
+
+      if (currentVideo) {
+        // Pause the previous video and remove it from the DOM.
+        pauseVideo();
+      }
+
+      videoThumbnail.style.display = "none";
+      videoTitle.style.display = "none";
+
+      if (!currentVideo) {
+        // Создаем новый элемент video только при необходимости
+        currentVideo = document.createElement("video");
+        currentVideo.style.width = "100%";
+        currentVideo.style.height = "100%";
+        currentVideo.style.borderRadius = "8px";
+        currentVideo.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+        currentVideo.style.objectFit = "cover";
+        currentVideo.style.marginTop = "10px";
+        videoCard.appendChild(currentVideo);
+      }
+
+      currentVideo.src = videoSource;
+      currentVideo.controls = true;
+      currentVideo.autoplay = true;
+      currentVideo.style.display = "block";
+    }
+
+    function pauseVideo() {
+      if (currentVideo) {
+        currentVideo.pause();
+        currentVideo.style.display = "none";
+        const prevVideoCard = currentVideo.parentElement;
+        const prevVideoThumbnail = prevVideoCard.querySelector("img");
+        const prevVideoTitle = prevVideoCard.querySelector("h2");
+        prevVideoThumbnail.style.display = "block";
+        prevVideoTitle.style.display = "block";
+        currentVideo.src = ""; // Очищаем source, чтобы при следующем открытии video перезагрузилось
+        currentVideo = null;
+      }
+    }
+  </script>
+</body>
+</html>
